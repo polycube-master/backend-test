@@ -7,7 +7,7 @@
 ### 1.1. 개발 환경
 
 - OpenJDK 17
-- Spring Boot 2.X.X ~ 3.X.X
+- Spring Boot 3.2.1
 
 ### 1.2. 라이브러리
 
