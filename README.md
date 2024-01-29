@@ -1,18 +1,19 @@
-# 폴리큐브 백엔드 개발자 테스트
+# 폴리큐브 백엔드 개발자 코딩 테스트
 
-**(주)폴리큐브**에서 시행하는 백엔드 개발자 테스트용 리포지토리입니다.
+**(주)폴리큐브**에서 시행하는 백엔드 개발자 코딩 테스트용 리포지토리입니다.
 
 ## 1. 시작하기
 
 ### 1.1. 개발 환경
 
 - OpenJDK 17
-- Spring Boot 3.2.1
+- Spring Boot 2.X.X ~ 3.X.X
 
 ### 1.2. 라이브러리
 
 - Spring Web
-- lombok
+- Lombok
+- H2 Database ( ID : pc, PW : 2024 )
 - 그 외 필요한 라이브러리는 `build.gradle`에 추가하시면 됩니다.
 
 **라이브러리 추가 시, 어떠한 이유로 추가했는지 `Pull Request`에 간단히 적어주시면 됩니다.**
@@ -29,31 +30,33 @@
 
 ### 2.1. 공통 (20점)
 
-- [ ] `@ExceptionHandler`를 이용하여, 잘못된 요청에 대한 응답을 처리한다. (10점)
+- [ ] `@ControllerAdvice`, `@ExceptionHandler`를 이용하여, 잘못된 요청에 대한 응답을 처리한다. (4점)
   - [ ] API를 호출할 때, 잘못된 요청이 들어오면 HTTP 400 상태의 `{"reason": 실제사유}`을 응답한다.
   - [ ] API에 대한 실패 상황 통합 테스트 코드 작성
   - [ ] 존재하지 않는 API 호출 시, HTTP 404 상태의 `{"reason": 실제사유}`을 응답한다.
-- [ ] Spring MVC 아키텍처와 Restful API를 준수하여 개발한다. (5점)
+- [ ] Spring MVC 아키텍처와 Restful API를 준수하여 개발한다. (8점)
   - [ ] `@RestController`, `@Service`, `@Repository`를 이용하여 개발한다.
   - [ ] HTTP Method와 URI를 적절하게 사용하여 개발한다.
-- [ ] Clean Code를 준수하여 개발한다. (5점)
+- [ ] Clean Code를 준수하여 개발한다. (8점)
   - [ ] 코드 스타일을 일관되고 명확하게 작성한다.
   - [ ] 메소드와 클래스의 역할을 명확하게 작성한다.
 
-### 2.2. 기본 문제 (40점)
+### 2.2. 기본 문제 (50점)
 
-- [ ] `/health` API 구현 (10점)
-  - [ ] `/health` API를 호출하면, `{"status": "OK"}`을 응답한다.
-  - [ ] `/health` API에 대한 통합 테스트 코드 작성
-- [ ] user 등록 API 구현 (10점)
+- [ ] user 등록 API 구현 (8점)
   - [ ] `/users` API를 호출하면, `{"id": ?}`을 응답한다.
   - [ ] `/users` API에 대한 통합 테스트 코드 작성
-- [ ] user 조회 API 구현 (10점)
+- [ ] user 조회 API 구현 (8점)
   - [ ] `/users/{id}` API를 호출하면, `{"id": ?, "name": "?"}`을 응답한다.
   - [ ] `/users/{id}` API에 대한 통합 테스트 코드 작성
-- [ ] user 수정 API 구현 (10점)
+- [ ] user 수정 API 구현 (8점)
   - [ ] `/users/{id}` API를 호출하면, `{"id": ?, "name": "?"}`을 응답한다.
   - [ ] `/users/{id}` API에 대한 통합 테스트 코드 작성
+- [ ] 필터 구현 (12점)
+  - [ ] URL에 `? & = : //`를 제외한 특수문자가 포함되어 있을경우 접속을 차단하는 Filter 구현한다.
+  - [ ] `/users/{id}?name=test!!` API 호출에 대한 통합 테스트 코드 작성
+- [ ] Spring AOP를 활용한 로깅 구현 (14점)
+  - [ ] user 등록, 조회, 수정 API에 대해 Request시 Console에 Client Agent를 출력한다.
 
 `user` 테이블
 
@@ -61,9 +64,9 @@
 id,name
 ```
 
-### 2.3. 구현 문제 (40점)
+### 2.3. 구현 문제 (30점)
 
-#### 로또 번호 발급 API 구현
+#### 로또 번호 발급 API 구현 (10점)
 - [ ] `POST /lottos` API를 호출하면, `{"numbers": [?, ?, ?, ?, ?, ?]}`을 응답한다.
 - [ ] `POST /lottos` API에 대한 통합 테스트 코드 작성
 
@@ -81,7 +84,7 @@ curl -X POST -H "Content-Type: application/json" http://localhost:8080/lottos
 }
 ```
 
-#### 로또 번호 당첨자 검수 Batch 구현
+#### 로또 번호 당첨자 검수 Batch 구현 (20점)
 
 - [ ] 랜덤하게 로또 번호를 발급하여, 당첨 번호와 비교하여 당첨자를 검수하는 Batch를 구현한다.
   - [ ] 당첨자의 등수는 1등, 2등, 3등, 4등, 5등이 있다.
