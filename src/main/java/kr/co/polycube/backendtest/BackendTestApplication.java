@@ -8,8 +8,8 @@ public class BackendTestApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(
-            BackendTestApplication.class,
-            args
+                BackendTestApplication.class,
+                args
         );
     }
 
