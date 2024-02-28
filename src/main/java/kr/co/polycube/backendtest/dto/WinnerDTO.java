@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserDTO {
+public class WinnerDTO {
     private Long id;
-    private String name;
+    private Long lottoId;
+    private String rank;
 }
