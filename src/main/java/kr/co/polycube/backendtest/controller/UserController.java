@@ -2,8 +2,10 @@ package kr.co.polycube.backendtest.controller;
 
 import kr.co.polycube.backendtest.dto.UserDTO;
 import kr.co.polycube.backendtest.entity.User;
+import kr.co.polycube.backendtest.filter.SpecialCharacterFilter;
 import kr.co.polycube.backendtest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,16 +14,17 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
+    private final SpecialCharacterFilter specialCharacterFilter;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, SpecialCharacterFilter specialCharacterFilter) {
         this.userService = userService;
+        this.specialCharacterFilter = specialCharacterFilter;
     }
 
     // 사용자 등록 API
@@ -34,13 +37,13 @@ public class UserController {
     // 특정 사용자 조회 API
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUser(@PathVariable Long id){
+        System.out.println("test용");
         try {
             UserDTO existingUser = userService.getUserById(id);
             return ResponseEntity.ok(existingUser);
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-
     }
 
     // 특정 사용자 수정 API
@@ -50,6 +53,7 @@ public class UserController {
             UserDTO existingUser = userService.updateUser(id,updatedUserDTO);
             return ResponseEntity.ok(existingUser);
         } catch (NoSuchElementException e) {
+
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }

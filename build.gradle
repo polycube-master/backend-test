@@ -34,6 +34,8 @@ dependencies {
     implementation('javax.servlet:javax.servlet-api:4.0.1'); // 특수문자 필터 클래스에서 Servlet api 사용하기 위해 추가
     implementation 'javax.validation:validation-api:2.0.1.Final' // 데이터 유효성 검사 위해 추가
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1' // 단위 테스트를 위해 추가
+    testImplementation 'junit:junit:4.13.2' // @RunWith 어노테이션 사용하기 위해 추가
+
 
 
 }
