@@ -43,6 +43,7 @@ public class UserController {
 
     }
 
+    // 특정 사용자 수정 API
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO updatedUserDTO){
         try {
